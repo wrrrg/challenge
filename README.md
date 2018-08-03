@@ -27,3 +27,35 @@ The challenge is designed to take a maximum of 8 hours. If you can track your ho
 [Github Basics](https://guides.github.com/activities/hello-world)
 [TDD (Test Driven Development)](https://www.agilealliance.org/glossary/tdd)
 [This Repo's Wiki](https://github.com/moove-it/challenge/wiki)
+
+## Installing dependencies
+
+### Install Node
+
+This app runs on Node.js v8.11.3. If you aren't sure you have node, run `node -v` from the command line. If it comes back with `v8.11.x`, you are good to go. Otherwise, download the LTS version here: (https://nodejs.org/en/). Once installation is complete, run `node -v` again to confirm your version.
+
+### Install MongoDB
+
+This app uses a local MongoDB instance for data storage. Follow the instructions [here](https://docs.mongodb.com/manual/installation/#mongodb-community-edition) to install and run MongoDB Community Edition for your OS. If you are running Mac OSX, we strongly advise following the instructions for installation using [Homebrew](https://brew.sh/).
+
+## Installing the app
+
+### Fork and clone the repository
+
+If you haven't already, fork this repository to your own [GitHub](https://github.com/) account. Clone your copy of the repository and `cd` into the project directory.
+
+### Install packages
+
+From the project directory, run `npm install` to install the application dependencies.
+
+## Run the app
+
+You will need three terminal windows:
+
+1.  In the first terminal, run `mongod` to start the mongo server. Add the flag `-v` to get verbose output. (This can be helpful when debugging).
+2.  In a second terminal, from the project's root directory run `npm run webpack:dev` to start the front end development server.
+3.  In the third terminal, from the project's root directory run `npm run server:local` to start the api server.
+
+In your browser, navigate to `localhost:8080`. You should see the landing page: "Welcome to Minutero".
+
+## Run the tests
