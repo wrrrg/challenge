@@ -53,7 +53,6 @@
     "react-s-alert": "^1.4.1",
     "react-select": "^2.0.0-beta.6",
     "react-simple-dropdown": "^3.2.0",
-    "react-super-modal": "^1.0.5",
     "tachyons": "^4.10.0",
     "uuid": "^3.3.0",
     "validator": "^10.4.0"

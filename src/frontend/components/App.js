@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { cloneDeep } from 'lodash';
-import Admin from './Admin';
 import Dashboard from './Dashboard';
 import Landing from './Landing';
-import Route, { isAdmin } from './AuthRoute';
 import Navbar from './Navbar';
 import Login from './Login';
 import NotFound from './NotFound';
-import RestrictedComponent from './RestrictedComponent';
 import { getUser, setUser, removeUser, userHasValidToken } from '../../utils/userUtils';
 import {
   fetchTimeEntries,
@@ -173,15 +170,6 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={Landing} isPrivate={false} />
             <Route path="/login" component={() => <Login login={this.login} />} isPrivate={false} />
-            <Route
-              path="/admin"
-              component={() => (
-                <RestrictedComponent isAdmin={isAdmin()}>
-                  <Admin />
-                </RestrictedComponent>
-              )}
-              isPrivate
-            />
             <Route
               path="/dashboard"
               component={() => (

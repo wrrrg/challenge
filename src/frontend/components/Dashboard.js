@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Timer from './Timer';
 import TimerHistory from './TimerHistory';
-import { isAdmin } from './AuthRoute';
 
 export default class Dashboard extends Component {
   render() {
@@ -26,12 +24,6 @@ export default class Dashboard extends Component {
 
     return (
       <div>
-        {
-          isAdmin() &&
-          <Link className="fw9 tracked-tight mooveItNavy" to="/admin">
-            <p className="mr3 tr">Admin Portal</p>
-          </Link>
-         }
         <Timer
           billable={billable}
           billableClick={billableClick}

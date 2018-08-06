@@ -14,9 +14,4 @@ export const fetchProjectsForDropdown = async () => {
   return formattedArray;
 };
 
-export const fetchProjectsForAdmin = async () => {
-  const response = await axios.get(`${API_URL}/projects`);
-  return response.data;
-};
-
-export default { fetchProjectsForDropdown, fetchProjectsForAdmin };
+export default { fetchProjectsForDropdown };

@@ -1,4 +1,3 @@
-import 'react-super-modal/dist/react-super-modal.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'tachyons'; // eslint-disable-line import/extensions
