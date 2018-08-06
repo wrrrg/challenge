@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ProjectSelect from '../../../src/frontend/components/ProjectSelect';
+import ProjectSelect from '../../../src/components/ProjectSelect';
 
 describe('ProjectSelect Component', () => {
   it('renders without crashing', () => {

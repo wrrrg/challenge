@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import CategorySelect from '../../../src/frontend/components//CategorySelect';
+import CategorySelect from '../../../src/components/CategorySelect';
 
 describe('CategorySelect Component', () => {
   let categories = [];

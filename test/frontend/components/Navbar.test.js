@@ -2,7 +2,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { BrowserRouter } from 'react-router-dom';
-import Navbar from '../../../src/frontend/components/Navbar';
+import Navbar from '../../../src/components/Navbar';
 
 describe('Navbar', () => {
   it('renders without crashing', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Timer from '../../../src/frontend/components/TimerMode';
+import Timer from '../../../src/components/TimerMode';
 import { setTimeEntryInLocalStorage } from '../../../src/utils/timerUtils';
 import timestamps from '../../mock/timestamps';
 

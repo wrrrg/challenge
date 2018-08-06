@@ -8,9 +8,9 @@ import {
   getTimeEntryFromLocalStorage,
   setTimeEntryInLocalStorage,
   removeTimeEntryFromLocalStorage,
-} from '../../utils/timerUtils';
-import { createTimestamp } from '../../utils/timeUtils';
-import dummyCategories from '../../utils/dummyCategories';
+} from '../utils/timerUtils';
+import { createTimestamp } from '../utils/timeUtils';
+import dummyCategories from '../utils/dummyCategories';
 
 export default class App extends Component {
   constructor(props) {

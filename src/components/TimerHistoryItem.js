@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { displayDate, displayStartAndEndTimes, displayTimeElapsed } from '../../utils/timeUtils';
+import { displayDate, displayStartAndEndTimes, displayTimeElapsed } from '../utils/timeUtils';
 
 export default class TimerHistoryItem extends Component {
   render() {

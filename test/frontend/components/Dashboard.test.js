@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
-import Dashboard from '../../../src/frontend/components/Dashboard';
+import Dashboard from '../../../src/components/Dashboard';
 
 describe('Dashboard Component', () => {
   it('renders without crashing', () => {

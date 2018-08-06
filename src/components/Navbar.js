@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
-import logo from '../../../static/Moove_It-Logo_W.png';
+import logo from '../../static/Moove_It-Logo_W.png';
 
 function Navbar() {
   return (

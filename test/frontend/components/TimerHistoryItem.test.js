@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import TimerHistoryItem from '../../../src/frontend/components/TimerHistoryItem';
+import TimerHistoryItem from '../../../src/components/TimerHistoryItem';
 import { displayDate } from '../../../src/utils/timeUtils.js';
 import timeEntrySeeds from '../../dummyData/timeEntries';
 

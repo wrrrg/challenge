@@ -11,7 +11,7 @@ import {
   createManualTimestamp,
   createManualTimestampWithDate,
   displayTimeInput,
-} from '../../utils/timeUtils';
+} from '../utils/timeUtils';
 
 const TIMER_WARNING = 'Please fill out correct time entry';
 const INVALID_TIME = 'Please enter a valid time';

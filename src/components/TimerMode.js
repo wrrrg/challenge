@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faSquare } from '@fortawesome/free-solid-svg-icons';
 
 import DocumentHead from './DocumentHead';
-import { getTimeEntryFromLocalStorage } from '../../utils/timerUtils';
-import { createTimestamp, displayTimeElapsed } from '../../utils/timeUtils';
+import { getTimeEntryFromLocalStorage } from '../utils/timerUtils';
+import { createTimestamp, displayTimeElapsed } from '../utils/timeUtils';
 
 export default class TimerMode extends Component {
   constructor(props) {

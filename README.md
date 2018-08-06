@@ -32,7 +32,7 @@ The challenge is designed to take a maximum of 8 hours. If you can track your ho
 
 ### Install Node
 
-This app runs on Node.js v8.11.3. If you aren't sure you have node, run `node -v` from the command line. If it comes back with `v8.11.x`, you are good to go. Otherwise, download the LTS version here: (https://nodejs.org/en/). Once installation is complete, run `node -v` again to confirm your version.
+This app assumes you have Node.js v8.11.3. If you aren't sure you have node, run `node -v` from the command line. If it comes back with `v8.11.x`, you are good to go. Otherwise, download the LTS version here: (https://nodejs.org/en/). Once installation is complete, run `node -v` again to confirm your version.
 
 ## Installing the app
 
@@ -46,10 +46,10 @@ From the project directory, run `npm install` to install the application depende
 
 ## Run the app
 
-You will need three terminal windows:
-
 Run `npm run webpack:dev` to start the development server.
 
 In your browser, navigate to `localhost:8080`. You should see the landing page: "Welcome to Minutero".
 
 ## Run the tests
+
+Run `npm test` after installation to confirm that all of the tests pass.
