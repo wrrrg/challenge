@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ManualMode from '../../../src/frontend/components/ManualMode';
 import { setTimeEntryInLocalStorage } from '../../../src/utils/timerUtils';
-import timeEntrySeeds from '../../server/seeds/timeEntries';
+import timeEntrySeeds from '../../dummyData/timeEntries';
 
 setTimeEntryInLocalStorage(timeEntrySeeds);
 

@@ -2,24 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
-import { fetchProjectsForDropdown } from '../../utils/fetchProjects';
-
+// TODO: implement adding projects to this dropdown
 class ProjectSelect extends Component {
   constructor() {
     super();
     this.state = {
       projects: [],
     };
-  }
-
-  componentDidMount() {
-    this.updateProjects();
-  }
-
-  async updateProjects() {
-    // this needs to occurs in App.js (eventually Dashboard.js)
-    const fetchedProjects = await fetchProjectsForDropdown();
-    this.setState({ projects: fetchedProjects });
   }
 
   render() {

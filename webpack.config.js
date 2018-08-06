@@ -3,11 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-if (process.env.NODE_ENV === 'production') {
-  require('dotenv').config({ path: '.prod.env' }); // eslint-disable-line global-require
-} else {
-  require('dotenv').config(); // eslint-disable-line global-require
-}
 module.exports = {
   entry: ['babel-polyfill', path.join(__dirname, './src/frontend/index.js')],
   mode: process.env.NODE_ENV || 'development',

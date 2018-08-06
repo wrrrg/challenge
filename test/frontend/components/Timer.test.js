@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Timer from '../../../src/frontend/components/Timer';
 import { setTimeEntryInLocalStorage } from '../../../src/utils/timerUtils';
-import timeEntrySeeds from '../../server/seeds/timeEntries';
+import timeEntrySeeds from '../../dummyData/timeEntries';
 
 let billable;
 let billableClick;

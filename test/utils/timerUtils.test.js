@@ -2,7 +2,7 @@ import {
   getTimeEntryFromLocalStorage,
   setTimeEntryInLocalStorage,
 } from '../../src/utils/timerUtils';
-import timeEntrySeeds from '../server/seeds/timeEntries';
+import timeEntrySeeds from '../dummyData/timeEntries';
 
 beforeEach(() => {
   setTimeEntryInLocalStorage(timeEntrySeeds);

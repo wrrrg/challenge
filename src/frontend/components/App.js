@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { cloneDeep } from 'lodash';
 import Dashboard from './Dashboard';
 import Landing from './Landing';
 import Navbar from './Navbar';
-import Login from './Login';
 import NotFound from './NotFound';
-import { getUser, setUser, removeUser, userHasValidToken } from '../../utils/userUtils';
 import {
-  fetchTimeEntries,
   getTimeEntryFromLocalStorage,
   setTimeEntryInLocalStorage,
-  postTimeEntry,
   removeTimeEntryFromLocalStorage,
 } from '../../utils/timerUtils';
 import { createTimestamp } from '../../utils/timeUtils';
-import { VALID_TOKEN } from '../../constants';
 import dummyCategories from '../../utils/dummyCategories';
 
 export default class App extends Component {
@@ -23,11 +17,9 @@ export default class App extends Component {
     super(props);
     this.state = {
       billable: false,
-      categories: cloneDeep(dummyCategories),
+      categories: dummyCategories,
       categoriesOpen: false,
-      currentUser: getUser() || {},
       description: '',
-      isLoggedIn: userHasValidToken(VALID_TOKEN),
       isTiming: false,
       inTimerMode: true,
       project: '',
@@ -39,15 +31,8 @@ export default class App extends Component {
     this.handleManualSubmit = this.handleManualSubmit.bind(this);
     this.handleProjectSelect = this.handleProjectSelect.bind(this);
     this.handleTimerClick = this.handleTimerClick.bind(this);
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
     this.toggleCategoriesList = this.toggleCategoriesList.bind(this);
-    this.updateTimeEntries = this.updateTimeEntries.bind(this);
     this.handleTimerMode = this.handleTimerMode.bind(this);
-  }
-
-  componentDidMount() {
-    this.updateTimeEntries();
   }
 
   resetAppState() {
@@ -59,18 +44,6 @@ export default class App extends Component {
       isTiming: false,
       project: '',
     });
-  }
-
-  login(user) {
-    setUser(user);
-    const currentUser = Object.assign({}, user);
-    this.setState({ isLoggedIn: true, currentUser });
-  }
-
-  logout() {
-    removeUser();
-    this.resetAppState();
-    this.setState({ isLoggedIn: false });
   }
 
   billableClick() {
@@ -127,15 +100,17 @@ export default class App extends Component {
       const entry = getTimeEntryFromLocalStorage();
       removeTimeEntryFromLocalStorage();
       entry.timeEnd = createTimestamp();
-      await postTimeEntry(entry);
-      this.updateTimeEntries();
+      this.addTimeEntry(entry);
     }
   }
 
-  async handleManualSubmit(timeStart, timeEnd) {
+  addTimeEntry(entry) {
+    this.setState(prevState => ({ timeEntries: [...prevState.timeEntries, entry] }));
+  }
+
+  handleManualSubmit(timeStart, timeEnd) {
     const timeEntry = this.createTimeEntryObj(timeStart, timeEnd);
-    await postTimeEntry(timeEntry);
-    this.updateTimeEntries();
+    this.addTimeEntry(timeEntry);
   }
 
   handleTimerMode() {
@@ -145,19 +120,12 @@ export default class App extends Component {
     }
   }
 
-  async updateTimeEntries() {
-    const fetchedTimeEntries = await fetchTimeEntries();
-    this.setState({ timeEntries: fetchedTimeEntries });
-  }
-
   render() {
     const {
       billable,
       categories,
       categoriesOpen,
-      currentUser,
       inTimerMode,
-      isLoggedIn,
       isTiming,
       project,
       timeEntries,
@@ -166,10 +134,9 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <Navbar isLoggedIn={isLoggedIn} user={currentUser} logout={this.logout} />
+          <Navbar />
           <Switch>
-            <Route exact path="/" component={Landing} isPrivate={false} />
-            <Route path="/login" component={() => <Login login={this.login} />} isPrivate={false} />
+            <Route exact path="/" component={Landing} />
             <Route
               path="/dashboard"
               component={() => (
@@ -192,7 +159,7 @@ export default class App extends Component {
               )}
               isPrivate
             />
-            <Route path="*" component={NotFound} isPrivate={false} />
+            <Route path="*" component={NotFound} />
           </Switch>
         </div>
       </Router>
