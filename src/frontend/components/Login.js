@@ -6,13 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import sessionLogin, { handleGitHubLogin } from '../../utils/sessionLogin';
 import '../styles/styles.scss';
-import {
-  INVALID_EMAIL,
-  PASSWORD_LENGTH,
-  INVALID_LOGIN,
-  VALID_TOKEN,
-  INVALID_GITHUB_LOGIN,
-} from '../../constants';
+import { VALID_TOKEN } from '../../constants';
+
+const INVALID_EMAIL = 'Please enter a valid email address.';
+const PASSWORD_LENGTH = 'Password should be at least 6 characters.';
+const INVALID_LOGIN = 'Invalid email or password! Please try again.';
+const INVALID_GITHUB_LOGIN = 'Login error with GitHub. Please try again.';
 
 class Login extends Component {
   constructor(props) {
