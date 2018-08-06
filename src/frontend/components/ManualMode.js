@@ -12,7 +12,9 @@ import {
   createManualTimestampWithDate,
   displayTimeInput,
 } from '../../utils/timeUtils';
-import { TIMER_WARNING, INVALID_TIME } from '../../constants';
+
+const TIMER_WARNING = 'Please fill out correct time entry';
+const INVALID_TIME = 'Please enter a valid time';
 
 export default class ManualMode extends Component {
   constructor(props) {

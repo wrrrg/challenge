@@ -1,5 +1,19 @@
 import moment from 'moment';
-import { TIME_INPUTS } from '../constants';
+
+const TIME_INPUTS = [
+  'hh:mma',
+  'hh:mm a',
+  'hmm',
+  'hmma',
+  'hmm a',
+  'hhmm',
+  'hhmma',
+  'hhmm a',
+  'HHmm',
+  'HH:mm',
+  'Hmm',
+  'H:mm',
+];
 
 // used in manual timer to convert user input
 export function displayTimeInput(input) {
