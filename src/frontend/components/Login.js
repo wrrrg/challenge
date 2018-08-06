@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmail, isLength } from 'validator';
-import GitHubLogin from 'react-github-login';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import sessionLogin, { handleGitHubLogin } from '../../utils/sessionLogin';
+import sessionLogin from '../../utils/sessionLogin';
 import '../styles/styles.scss';
 import { VALID_TOKEN } from '../../constants';
 
 const INVALID_EMAIL = 'Please enter a valid email address.';
 const PASSWORD_LENGTH = 'Password should be at least 6 characters.';
 const INVALID_LOGIN = 'Invalid email or password! Please try again.';
-const INVALID_GITHUB_LOGIN = 'Login error with GitHub. Please try again.';
 
 class Login extends Component {
   constructor(props) {
@@ -26,23 +22,9 @@ class Login extends Component {
     this.emailChange = this.emailChange.bind(this);
     this.getDisabledStatus = this.getDisabledStatus.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
-    this.onFailure = this.onFailure.bind(this);
-    this.onSuccess = this.onSuccess.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
     this.validatePassword = this.validatePassword.bind(this);
-  }
-
-  onSuccess(response) {
-    const { login } = this.props;
-    handleGitHubLogin(response).then((req) => {
-      const { email, token: authToken } = req.data;
-      login({ email, authToken });
-    });
-  }
-
-  onFailure() {
-    this.setState({ status: INVALID_GITHUB_LOGIN, loginError: true });
   }
 
   getDisabledStatus() {
@@ -150,15 +132,6 @@ class Login extends Component {
               />
             </div>
           </form>
-          <GitHubLogin
-            clientId={process.env.GITHUB_CLIENT_ID}
-            onSuccess={this.onSuccess}
-            onFailure={this.onFailure}
-            redirectUri=""
-            className="f6 ph3 pv2 mv1 outline-0 input-reset dib bg-transparent ba b--moon-gray bg-white mooveItNavybg mooveItTeal grow pointer"
-          >
-            <FontAwesomeIcon icon={faGithub} className="pr1" size="lg" /> Sign In with GitHub
-          </GitHubLogin>
         </main>
       </div>
     );
