@@ -46,7 +46,7 @@ From the project directory, run `npm install` to install the application depende
 
 ## Run the app
 
-Run `npm run webpack:dev` to start the development server.
+Run `npm start` to start the development server.
 
 In your browser, navigate to `localhost:8080`. You should see the landing page: "Welcome to Minutero".
 
