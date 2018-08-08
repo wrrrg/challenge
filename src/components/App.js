@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import Landing from './Landing';
 import Navbar from './Navbar';
-import NotFound from './NotFound';
 import {
   getTimeEntryFromLocalStorage,
   setTimeEntryInLocalStorage,
@@ -132,37 +129,25 @@ export default class App extends Component {
     } = this.state;
 
     return (
-      <Router>
-        <div>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route
-              path="/dashboard"
-              component={() => (
-                <Dashboard
-                  billable={billable}
-                  billableClick={this.billableClick}
-                  categories={categories}
-                  categoriesOpen={categoriesOpen}
-                  handleCategorySelect={this.handleCategorySelect}
-                  handleManualSubmit={this.handleManualSubmit}
-                  handleProjectSelect={this.handleProjectSelect}
-                  handleTimerClick={this.handleTimerClick}
-                  handleTimerMode={this.handleTimerMode}
-                  inTimerMode={inTimerMode}
-                  isTiming={isTiming}
-                  project={project}
-                  timeEntries={timeEntries}
-                  toggleCategoriesList={this.toggleCategoriesList}
-                />
-              )}
-              isPrivate
-            />
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </div>
-      </Router>
+      <div>
+        <Navbar />
+        <Dashboard
+          billable={billable}
+          billableClick={this.billableClick}
+          categories={categories}
+          categoriesOpen={categoriesOpen}
+          handleCategorySelect={this.handleCategorySelect}
+          handleManualSubmit={this.handleManualSubmit}
+          handleProjectSelect={this.handleProjectSelect}
+          handleTimerClick={this.handleTimerClick}
+          handleTimerMode={this.handleTimerMode}
+          inTimerMode={inTimerMode}
+          isTiming={isTiming}
+          project={project}
+          timeEntries={timeEntries}
+          toggleCategoriesList={this.toggleCategoriesList}
+        />
+      </div>
     );
   }
 }
