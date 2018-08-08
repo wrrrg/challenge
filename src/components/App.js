@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Dashboard from './Dashboard';
-import Navbar from './Navbar';
+import PropTypes from 'prop-types';
+
 import {
   getTimeEntryFromLocalStorage,
   setTimeEntryInLocalStorage,
@@ -9,7 +9,11 @@ import {
 import { createTimestamp } from '../utils/timeUtils';
 import dummyCategories from '../utils/dummyCategories';
 
-export default class App extends Component {
+import Navbar from './Navbar';
+import Timer from './Timer';
+import TimerHistory from './TimerHistory';
+
+export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -131,7 +135,7 @@ export default class App extends Component {
     return (
       <div>
         <Navbar />
-        <Dashboard
+        <Timer
           billable={billable}
           billableClick={this.billableClick}
           categories={categories}
@@ -144,9 +148,9 @@ export default class App extends Component {
           inTimerMode={inTimerMode}
           isTiming={isTiming}
           project={project}
-          timeEntries={timeEntries}
           toggleCategoriesList={this.toggleCategoriesList}
         />
+        <TimerHistory timeEntries={timeEntries} />
       </div>
     );
   }
