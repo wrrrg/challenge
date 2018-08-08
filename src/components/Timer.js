@@ -3,6 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
+import {
+  getTimeEntryFromLocalStorage,
+  setTimeEntryInLocalStorage,
+  removeTimeEntryFromLocalStorage,
+} from '../utils/timerUtils';
+import { createTimestamp } from '../utils/timeUtils';
+import dummyCategories from '../utils/dummyCategories';
+
 import Task from './Task';
 import Billable from './Billable';
 import ProjectSelect from './ProjectSelect';
@@ -11,87 +19,151 @@ import ManualMode from './ManualMode';
 import CategorySelect from './CategorySelect';
 
 export default class Timer extends Component {
-  renderTimerMode() {
-    const {
-      isTiming, handleTimerClick, handleManualSubmit, inTimerMode,
-    } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      billable: false,
+      categories: dummyCategories,
+      categoriesOpen: false,
+      description: '',
+      isTiming: false,
+      inTimerMode: true,
+      project: '',
+    };
 
-    return (
-      <div className="flex w-100 items-center justify-end ph2">
-        {inTimerMode ? (
-          <TimerMode isTiming={isTiming} handleTimerClick={handleTimerClick} />
-        ) : (
-          <ManualMode handleManualSubmit={handleManualSubmit} />
-        )}
-      </div>
-    );
+    this.billableClick = this.billableClick.bind(this);
+    this.handleCategorySelect = this.handleCategorySelect.bind(this);
+    this.handleManualSubmit = this.handleManualSubmit.bind(this);
+    this.handleProjectSelect = this.handleProjectSelect.bind(this);
+    this.handleTimerClick = this.handleTimerClick.bind(this);
+    this.toggleCategoriesList = this.toggleCategoriesList.bind(this);
+    this.handleTimerMode = this.handleTimerMode.bind(this);
   }
 
-  renderTimerModeIcon() {
-    const { inTimerMode } = this.props;
-    const { handleTimerMode } = this.props;
-    return (
-      <div className="items-center pointer dim">
-        <FontAwesomeIcon
-          icon={inTimerMode ? faEdit : faUserClock}
-          size="1x"
-          onClick={handleTimerMode}
-        />
-      </div>
-    );
+  resetAppState() {
+    this.setState({
+      billable: false,
+      categories: dummyCategories,
+      categoriesOpen: false,
+      description: '',
+      isTiming: false,
+      project: '',
+    });
+  }
+
+  billableClick() {
+    this.setState(prevState => ({ billable: !prevState.billable, categoriesOpen: false }));
+  }
+
+  handleProjectSelect(project) {
+    // react-select library turns project (event) into an array if you remove a project
+    this.setState({ project: Array.isArray(project) ? '' : project._id }); // eslint-disable-line no-underscore-dangle
+  }
+
+  toggleCategoriesList() {
+    this.setState(prevState => ({
+      categoriesOpen: !prevState.categoriesOpen,
+    }));
+  }
+
+  handleCategorySelect(id) {
+    this.setState((prevState) => {
+      const { categories } = prevState;
+      categories[id].selected = !categories[id].selected;
+      return {
+        categories,
+        categoriesOpen: true,
+      };
+    });
+  }
+
+  createTimeEntryObj(timeStart, timeEnd) {
+    const {
+      billable, categories, description, project,
+    } = this.state;
+
+    return {
+      billable,
+      categories,
+      description,
+      project,
+      timeEnd,
+      timeStart,
+    };
+  }
+
+  handleTimerClick() {
+    const { isTiming } = this.state;
+    const { addTimeEntry } = this.props;
+
+    if (!isTiming) {
+      const timeStart = createTimestamp();
+      const entry = this.createTimeEntryObj(timeStart);
+      setTimeEntryInLocalStorage(entry);
+      this.setState({ isTiming: true, categoriesOpen: false });
+    } else {
+      this.resetAppState();
+      const entry = getTimeEntryFromLocalStorage();
+      removeTimeEntryFromLocalStorage();
+      entry.timeEnd = createTimestamp();
+      addTimeEntry(entry);
+    }
+  }
+
+  handleManualSubmit(timeStart, timeEnd) {
+    const { addTimeEntry } = this.props;
+
+    const timeEntry = this.createTimeEntryObj(timeStart, timeEnd);
+    addTimeEntry(timeEntry);
+  }
+
+  handleTimerMode() {
+    const { isTiming } = this.state;
+    if (!isTiming) {
+      this.setState(prevState => ({ inTimerMode: !prevState.inTimerMode }));
+    }
   }
 
   render() {
     const {
-      billable,
-      billableClick,
-      categories,
-      categoriesOpen,
-      handleCategorySelect,
-      handleProjectSelect,
-      project,
-      toggleCategoriesList,
-    } = this.props;
+      billable, categories, categoriesOpen, project, isTiming, inTimerMode,
+    } = this.state;
 
     return (
       <div className="mw100 center bg-white br3 h3 pa3 mv3 ba b--black-10 flex justify-between items-center">
         <Task />
 
-        <ProjectSelect handleProjectSelect={handleProjectSelect} project={project} />
+        <ProjectSelect handleProjectSelect={this.handleProjectSelect} project={project} />
 
         <CategorySelect
           categories={categories}
           categoriesOpen={categoriesOpen}
-          toggleCategoriesList={toggleCategoriesList}
-          handleCategorySelect={handleCategorySelect}
+          toggleCategoriesList={this.toggleCategoriesList}
+          handleCategorySelect={this.handleCategorySelect}
         />
 
-        <Billable billableClick={billableClick} billable={billable} />
+        <Billable billableClick={this.billableClick} billable={billable} />
 
-        {this.renderTimerMode()}
+        <div className="flex w-100 items-center justify-end ph2">
+          {inTimerMode ? (
+            <TimerMode isTiming={isTiming} handleTimerClick={this.handleTimerClick} />
+          ) : (
+            <ManualMode handleManualSubmit={this.handleManualSubmit} />
+          )}
+        </div>
 
-        {this.renderTimerModeIcon()}
+        <div className="items-center pointer dim">
+          <FontAwesomeIcon
+            icon={inTimerMode ? faEdit : faUserClock}
+            size="1x"
+            onClick={this.handleTimerMode}
+          />
+        </div>
       </div>
     );
   }
 }
 
 Timer.propTypes = {
-  billable: PropTypes.bool.isRequired,
-  billableClick: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.object),
-  categoriesOpen: PropTypes.bool.isRequired,
-  handleCategorySelect: PropTypes.func.isRequired,
-  handleManualSubmit: PropTypes.func.isRequired,
-  handleProjectSelect: PropTypes.func.isRequired,
-  handleTimerClick: PropTypes.func.isRequired,
-  handleTimerMode: PropTypes.func.isRequired,
-  inTimerMode: PropTypes.bool.isRequired,
-  isTiming: PropTypes.bool.isRequired,
-  project: PropTypes.string.isRequired,
-  toggleCategoriesList: PropTypes.func.isRequired,
-};
-
-Timer.defaultProps = {
-  categories: [],
+  addTimeEntry: PropTypes.func.isRequired,
 };
