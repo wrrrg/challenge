@@ -9,7 +9,6 @@ import {
   removeTimeEntryFromLocalStorage,
 } from '../utils/timerUtils';
 import { createTimestamp } from '../utils/timeUtils';
-import dummyCategories from '../utils/dummyCategories';
 
 import Task from './Task';
 import Billable from './Billable';
@@ -23,8 +22,7 @@ export default class Timer extends Component {
     super(props);
     this.state = {
       billable: false,
-      categories: dummyCategories,
-      categoriesOpen: false,
+      selectedCategories: [],
       description: '',
       isTiming: false,
       inTimerMode: true,
@@ -32,19 +30,17 @@ export default class Timer extends Component {
     };
 
     this.billableClick = this.billableClick.bind(this);
-    this.handleCategorySelect = this.handleCategorySelect.bind(this);
     this.handleManualSubmit = this.handleManualSubmit.bind(this);
     this.handleProjectSelect = this.handleProjectSelect.bind(this);
     this.handleTimerClick = this.handleTimerClick.bind(this);
-    this.toggleCategoriesList = this.toggleCategoriesList.bind(this);
     this.handleTimerMode = this.handleTimerMode.bind(this);
+    this.updateSelectedCategories = this.updateSelectedCategories.bind(this);
   }
 
   resetAppState() {
     this.setState({
       billable: false,
-      categories: dummyCategories,
-      categoriesOpen: false,
+      selectedCategories: [],
       description: '',
       isTiming: false,
       project: '',
@@ -52,7 +48,7 @@ export default class Timer extends Component {
   }
 
   billableClick() {
-    this.setState(prevState => ({ billable: !prevState.billable, categoriesOpen: false }));
+    this.setState(prevState => ({ billable: !prevState.billable }));
   }
 
   handleProjectSelect(project) {
@@ -60,31 +56,14 @@ export default class Timer extends Component {
     this.setState({ project: Array.isArray(project) ? '' : project._id }); // eslint-disable-line no-underscore-dangle
   }
 
-  toggleCategoriesList() {
-    this.setState(prevState => ({
-      categoriesOpen: !prevState.categoriesOpen,
-    }));
-  }
-
-  handleCategorySelect(id) {
-    this.setState((prevState) => {
-      const { categories } = prevState;
-      categories[id].selected = !categories[id].selected;
-      return {
-        categories,
-        categoriesOpen: true,
-      };
-    });
-  }
-
   createTimeEntryObj(timeStart, timeEnd) {
     const {
-      billable, categories, description, project,
+      billable, selectedCategories, description, project,
     } = this.state;
 
     return {
       billable,
-      categories,
+      categories: selectedCategories,
       description,
       project,
       timeEnd,
@@ -100,7 +79,7 @@ export default class Timer extends Component {
       const timeStart = createTimestamp();
       const entry = this.createTimeEntryObj(timeStart);
       setTimeEntryInLocalStorage(entry);
-      this.setState({ isTiming: true, categoriesOpen: false });
+      this.setState({ isTiming: true });
     } else {
       this.resetAppState();
       const entry = getTimeEntryFromLocalStorage();
@@ -124,9 +103,13 @@ export default class Timer extends Component {
     }
   }
 
+  updateSelectedCategories(selectedCategories) {
+    this.setState({ selectedCategories });
+  }
+
   render() {
     const {
-      billable, categories, categoriesOpen, project, isTiming, inTimerMode,
+      billable, selectedCategories, project, isTiming, inTimerMode,
     } = this.state;
 
     return (
@@ -136,10 +119,8 @@ export default class Timer extends Component {
         <ProjectSelect handleProjectSelect={this.handleProjectSelect} project={project} />
 
         <CategorySelect
-          categories={categories}
-          categoriesOpen={categoriesOpen}
-          toggleCategoriesList={this.toggleCategoriesList}
-          handleCategorySelect={this.handleCategorySelect}
+          selectedCategories={selectedCategories}
+          updateSelectedCategories={this.updateSelectedCategories}
         />
 
         <Billable billableClick={this.billableClick} billable={billable} />
