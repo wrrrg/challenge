@@ -84,7 +84,7 @@ export default class App extends Component {
     };
   }
 
-  async handleTimerClick() {
+  handleTimerClick() {
     const { isTiming } = this.state;
 
     if (!isTiming) {
