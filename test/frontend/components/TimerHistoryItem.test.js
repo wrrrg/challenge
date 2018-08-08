@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import TimerHistoryItem from '../../../src/components/TimerHistoryItem';
 import { displayDate } from '../../../src/utils/timeUtils.js';
-import timeEntrySeeds from '../../dummyData/timeEntries';
+import timeEntrySeeds from '../../../dummyData/timeEntries';
 
 const {
   billable, categories, description, project, timeEnd, timeStart,
