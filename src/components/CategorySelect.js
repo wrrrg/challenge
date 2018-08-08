@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTag, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-import dummyCategories from '../utils/dummyCategories';
+import dummyCategories from '../../dummyData/categories';
 
 class CategorySelect extends Component {
   constructor(props) {
