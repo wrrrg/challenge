@@ -9,7 +9,7 @@ const {
 } = timeEntrySeeds[0];
 
 describe('TimerHistoryItem Component', () => {
-  it.skip('renders without crashing', () => {
+  it('renders without crashing', () => {
     shallow(<TimerHistoryItem
       billable={billable}
       categories={categories}
