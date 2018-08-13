@@ -1,11 +1,8 @@
-import {
-  getTimeEntryFromLocalStorage,
-  setTimeEntryInLocalStorage,
-} from '../../src/utils/timerUtils';
+import { getTimeEntry, createTimeEntry } from '../../src/utils/timerUtils';
 import timeEntrySeeds from '../../dummyData/timeEntries';
 
 beforeEach(() => {
-  setTimeEntryInLocalStorage(timeEntrySeeds);
+  createTimeEntry(timeEntrySeeds);
 });
 
 afterEach(() => {
@@ -15,8 +12,8 @@ afterEach(() => {
 describe('timer utilities', () => {
   it('it sets and gets time entry in local storage', () => {
     const timeEntry = { description: 'This is a task' };
-    setTimeEntryInLocalStorage(timeEntry);
-    const timeEntryFromLocalStorage = getTimeEntryFromLocalStorage();
+    const key = createTimeEntry(timeEntry);
+    const timeEntryFromLocalStorage = getTimeEntry(key);
     expect(timeEntryFromLocalStorage.description).toBe('This is a task');
   });
 });
