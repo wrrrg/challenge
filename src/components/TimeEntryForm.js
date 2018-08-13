@@ -7,17 +7,19 @@ import ProjectSelect from './ProjectSelect';
 import CategorySelect from './CategorySelect';
 import Timer from './Timer';
 
+const defaultState = {
+  description: '',
+  selectedProject: '',
+  selectedCategories: [],
+  billable: false,
+  startTime: '',
+  endTime: '',
+};
+
 export default class TimeEntryForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      billable: false,
-      selectedCategories: [],
-      description: '',
-      selectedProject: '',
-      startTime: '',
-      endTime: '',
-    };
+    this.state = defaultState;
 
     this.setBillable = this.setBillable.bind(this);
     this.setSelectedProject = this.setSelectedProject.bind(this);
@@ -46,10 +48,10 @@ export default class TimeEntryForm extends Component {
   }
 
   setEndTime(endTime) {
-    this.setState({ endTime });
+    this.setState({ endTime }, () => this.saveTimeEntry());
   }
 
-  setTimeEntry() {
+  saveTimeEntry() {
     const {
       billable,
       selectedCategories,
@@ -68,17 +70,12 @@ export default class TimeEntryForm extends Component {
       endTime,
       startTime,
     });
+
+    this.resetForm();
   }
 
   resetForm() {
-    this.setState({
-      billable: false,
-      selectedCategories: [],
-      description: '',
-      selectedProject: '',
-      startTime: null,
-      endTime: null,
-    });
+    this.setState(defaultState);
   }
 
   render() {
