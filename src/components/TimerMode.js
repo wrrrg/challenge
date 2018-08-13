@@ -37,6 +37,7 @@ export default class TimerMode extends Component {
 
     handleTimerClick();
     clearInterval(this.timer);
+    this.setState({ currentTime: '' });
   }
 
   render() {

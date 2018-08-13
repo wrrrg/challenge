@@ -1,28 +1,30 @@
 import uuid from 'uuid/v1';
 
-function setTimeEntry(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+const KEY_PREFIX = 'minutero:';
+
+function setTimeEntry(id, value) {
+  localStorage.setItem(id, JSON.stringify(value));
 }
 
-export function getTimeEntry(key) {
-  return JSON.parse(localStorage.getItem(key));
+export function getTimeEntry(id) {
+  return JSON.parse(localStorage.getItem(id));
 }
 
-export function removeTimeEntry(key) {
-  return localStorage.removeItem(key);
+export function removeTimeEntry(id) {
+  return localStorage.removeItem(id);
 }
 
-export function updateTimeEntry(key, timeEntryAttrs) {
-  const oldTimeEntry = getTimeEntry(key);
+export function updateTimeEntry(id, timeEntryAttrs) {
+  const oldTimeEntry = getTimeEntry(id);
   const newTimeEntry = Object.assign(oldTimeEntry, timeEntryAttrs);
 
-  setTimeEntry(key, newTimeEntry);
+  setTimeEntry(id, newTimeEntry);
 }
 
 export function createTimeEntry(timeEntry) {
   const id = uuid();
 
-  setTimeEntry(id, timeEntry);
+  setTimeEntry(`${KEY_PREFIX}${id}`, timeEntry);
   return id;
 }
 
@@ -30,9 +32,10 @@ export function fetchTimeEntries() {
   const allTimeEntries = {};
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    const entry = getTimeEntry(key);
-    allTimeEntries[key] = entry;
+    const id = localStorage.key(i);
+    if (!id.includes(KEY_PREFIX)) continue;
+    const entry = getTimeEntry(id);
+    allTimeEntries[id] = entry;
   }
 
   return allTimeEntries;
