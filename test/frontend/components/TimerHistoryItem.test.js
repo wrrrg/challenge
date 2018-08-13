@@ -5,7 +5,7 @@ import { displayDate } from '../../../src/utils/timeUtils.js';
 import timeEntrySeeds from '../../../dummyData/timeEntries';
 
 const {
-  billable, categories, description, project, timeEnd, timeStart,
+  billable, categories, description, project, endTime, startTime,
 } = timeEntrySeeds[0];
 
 describe('TimerHistoryItem Component', () => {
@@ -15,8 +15,8 @@ describe('TimerHistoryItem Component', () => {
       categories={categories}
       description={description}
       project={project}
-      timeEnd={timeEnd}
-      timeStart={timeStart}
+      endTime={endTime}
+      startTime={startTime}
     />);
   });
 
@@ -27,8 +27,8 @@ describe('TimerHistoryItem Component', () => {
       categories={[]}
       project={project}
       description={description}
-      timeEnd={timeEnd}
-      timeStart={timeStart}
+      endTime={endTime}
+      startTime={startTime}
     />);
 
     const datetext = wrapper
@@ -46,8 +46,8 @@ describe('TimerHistoryItem Component', () => {
       categories={[]}
       project={project}
       description={description}
-      timeEnd={timeEnd}
-      timeStart={timeStart}
+      endTime={endTime}
+      startTime={startTime}
     />);
 
     const time = wrapper
@@ -64,8 +64,8 @@ describe('TimerHistoryItem Component', () => {
       categories={categories}
       description={description}
       project={project}
-      timeEnd={timeEnd}
-      timeStart={timeStart}
+      endTime={endTime}
+      startTime={startTime}
     />);
 
     const time = wrapper

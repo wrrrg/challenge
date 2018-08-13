@@ -47,7 +47,8 @@ export function displayStartAndEndTimes(startTime, endTime) {
 
 // used when displaying TimerHistory Item in Dashboard & used in running timer in Timer
 export function displayTimeElapsed(start, end) {
-  return moment.utc(moment(end).diff(moment(start))).format('HH:mm:ss');
+  const time = moment.utc(moment(end).diff(moment(start)));
+  return time.isValid() ? time.format('HH:mm:ss') : '00:00:00';
 }
 
 // used in Timer when creating manual entries

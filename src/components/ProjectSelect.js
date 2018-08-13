@@ -13,8 +13,8 @@ class ProjectSelect extends Component {
 
   render() {
     const { projects } = this.state;
-    const { handleProjectSelect, project } = this.props;
-    const displayValue = project.label ? project.label : project;
+    const { setSelectedProject, selectedProject } = this.props;
+    const displayValue = selectedProject.label ? selectedProject.label : selectedProject;
 
     const customStyle = {
       control: base => ({
@@ -37,7 +37,7 @@ class ProjectSelect extends Component {
           name="selected-project"
           placeholder=""
           value={displayValue}
-          onChange={handleProjectSelect}
+          onChange={setSelectedProject}
           options={projects}
           styles={customStyle}
         />
@@ -47,8 +47,8 @@ class ProjectSelect extends Component {
 }
 
 ProjectSelect.propTypes = {
-  handleProjectSelect: PropTypes.func.isRequired,
-  project: PropTypes.string.isRequired,
+  setSelectedProject: PropTypes.func.isRequired,
+  selectedProject: PropTypes.string.isRequired,
 };
 
 export default ProjectSelect;

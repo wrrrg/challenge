@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Timer from '../../../src/components/Timer';
+import TimeEntryForm from '../../../src/components/TimeEntryForm';
 import { setTimeEntryInLocalStorage } from '../../../src/utils/timerUtils';
 import timeEntrySeeds from '../../../dummyData/timeEntries';
 
@@ -12,8 +12,8 @@ beforeAll(() => {
   addTimeEntry = jest.fn();
 });
 
-describe('Timer', () => {
+describe('TimeEntryForm', () => {
   it('renders without crashing', () => {
-    shallow(<Timer addTimeEntry={addTimeEntry} />);
+    shallow(<TimeEntryForm addTimeEntry={addTimeEntry} />);
   });
 });

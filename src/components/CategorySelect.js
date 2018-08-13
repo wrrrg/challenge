@@ -24,13 +24,13 @@ class CategorySelect extends Component {
   }
 
   handleCategorySelect(id) {
-    const { selectedCategories, updateSelectedCategories } = this.props;
+    const { selectedCategories, setSelectedCategories } = this.props;
 
     const newSelectedCategories = selectedCategories.includes(id)
       ? selectedCategories.filter(cat => cat !== id)
       : [...selectedCategories, id];
 
-    updateSelectedCategories(newSelectedCategories);
+    setSelectedCategories(newSelectedCategories);
   }
 
   render() {
@@ -71,7 +71,7 @@ export default CategorySelect;
 
 CategorySelect.propTypes = {
   selectedCategories: PropTypes.arrayOf(PropTypes.string),
-  updateSelectedCategories: PropTypes.func.isRequired,
+  setSelectedCategories: PropTypes.func.isRequired,
 };
 
 CategorySelect.defaultProps = {

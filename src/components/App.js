@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Navbar from './Navbar';
-import Timer from './Timer';
+import TimeEntryForm from './TimeEntryForm';
 import TimerHistory from './TimerHistory';
 
 export default class Dashboard extends Component {
@@ -25,7 +25,7 @@ export default class Dashboard extends Component {
     return (
       <div>
         <Navbar />
-        <Timer addTimeEntry={this.addTimeEntry} />
+        <TimeEntryForm addTimeEntry={this.addTimeEntry} />
         <TimerHistory timeEntries={timeEntries} />
       </div>
     );

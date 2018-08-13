@@ -21,8 +21,8 @@ export default class ManualMode extends Component {
     super(props);
     this.state = {
       manualDate: moment(),
-      manualTimeEnd: '',
-      manualTimeStart: '',
+      manualEndTime: '',
+      manualStartTime: '',
     };
 
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -59,13 +59,13 @@ export default class ManualMode extends Component {
   }
 
   manualSubmitCallback() {
-    const { manualDate, manualTimeStart, manualTimeEnd } = this.state;
+    const { manualDate, manualStartTime, manualEndTime } = this.state;
     const { handleManualSubmit } = this.props;
 
-    if (manualTimeStart && manualTimeEnd) {
-      const timeStart = createManualTimestampWithDate(manualTimeStart, manualDate);
-      const timeEnd = createManualTimestamp(manualTimeEnd);
-      return handleManualSubmit(timeStart, timeEnd);
+    if (manualStartTime && manualEndTime) {
+      const startTime = createManualTimestampWithDate(manualStartTime, manualDate);
+      const endTime = createManualTimestamp(manualEndTime);
+      return handleManualSubmit(startTime, endTime);
     }
     return Alert.error(TIMER_WARNING, {
       position: 'bottom-right',
@@ -74,7 +74,7 @@ export default class ManualMode extends Component {
   }
 
   render() {
-    const { manualTimeStart, manualTimeEnd, manualDate } = this.state;
+    const { manualStartTime, manualEndTime, manualDate } = this.state;
 
     return (
       <div className="flex items-center justify-end ph2">
@@ -87,18 +87,18 @@ export default class ManualMode extends Component {
         />
         <input
           className="start input-reset ba b--black-20 pa2 mh1 db w4"
-          name="manualTimeStart"
+          name="manualStartTime"
           onChange={this.handleInputChange}
-          value={manualTimeStart}
+          value={manualStartTime}
           onBlur={this.validateManualTime}
           placeholder="Time In"
         />
         <FontAwesomeIcon icon={faArrowRight} size="1x" />
         <input
           className="end input-reset ba b--black-20 pa2 mh1 db w4"
-          name="manualTimeEnd"
+          name="manualEndTime"
           onChange={this.handleInputChange}
-          value={manualTimeEnd}
+          value={manualEndTime}
           onBlur={this.validateManualTime}
           placeholder="Time Out"
         />
