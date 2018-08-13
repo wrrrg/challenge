@@ -1,11 +1,42 @@
-export function setTimeEntryInLocalStorage(timeEntry) {
-  return localStorage.setItem('timeEntry', JSON.stringify(timeEntry));
+import uuid from 'uuid/v1';
+
+const KEY_PREFIX = 'minutero:';
+
+function setTimeEntry(id, value) {
+  localStorage.setItem(id, JSON.stringify(value));
 }
 
-export function getTimeEntryFromLocalStorage() {
-  return JSON.parse(localStorage.getItem('timeEntry'));
+export function getTimeEntry(id) {
+  return JSON.parse(localStorage.getItem(id));
 }
 
-export function removeTimeEntryFromLocalStorage() {
-  return localStorage.removeItem('timeEntry');
+export function removeTimeEntry(id) {
+  return localStorage.removeItem(id);
+}
+
+export function updateTimeEntry(id, timeEntryAttrs) {
+  const oldTimeEntry = getTimeEntry(id);
+  const newTimeEntry = Object.assign(oldTimeEntry, timeEntryAttrs);
+
+  setTimeEntry(id, newTimeEntry);
+}
+
+export function createTimeEntry(timeEntry) {
+  const id = uuid();
+
+  setTimeEntry(`${KEY_PREFIX}${id}`, timeEntry);
+  return id;
+}
+
+export function fetchTimeEntries() {
+  const allTimeEntries = {};
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < localStorage.length; i++) {
+    const id = localStorage.key(i);
+    if (!id.includes(KEY_PREFIX)) continue;
+    const entry = getTimeEntry(id);
+    allTimeEntries[id] = entry;
+  }
+
+  return allTimeEntries;
 }

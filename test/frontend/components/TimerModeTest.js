@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import TimerMode from '../../../src/components/TimerMode';
-import { setTimeEntryInLocalStorage } from '../../../src/utils/timerUtils';
+import { createTimeEntry } from '../../../src/utils/timerUtils';
 import timestamps from '../../mock/timestamps';
 
 let isTiming;

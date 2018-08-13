@@ -6,19 +6,23 @@ export default class TimerHistory extends Component {
   renderHistoryItem() {
     const { timeEntries } = this.props;
 
-    return timeEntries.map(({
-      _id, billable, categories, description, project, endTime, startTime,
-    }) => (
-      <TimerHistoryItem
-        billable={billable}
-        categories={categories}
-        description={description}
-        key={_id}
-        project={project}
-        endTime={endTime}
-        startTime={startTime}
-      />
-    ));
+    return Object.entries(timeEntries).map(([id, entry]) => {
+      const {
+        description, project, categories, billable, startTime, endTime,
+      } = entry;
+      return (
+        <TimerHistoryItem
+          key={id}
+          id={id}
+          description={description}
+          project={project}
+          categories={categories}
+          billable={billable}
+          startTime={startTime}
+          endTime={endTime}
+        />
+      );
+    });
   }
   render() {
     return <div>{this.renderHistoryItem()}</div>;
@@ -26,9 +30,5 @@ export default class TimerHistory extends Component {
 }
 
 TimerHistory.propTypes = {
-  timeEntries: PropTypes.arrayOf(PropTypes.object),
-};
-
-TimerHistory.defaultProps = {
-  timeEntries: [],
+  timeEntries: PropTypes.shape().isRequired,
 };
