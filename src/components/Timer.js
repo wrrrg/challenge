@@ -1,97 +1,87 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
-import Task from './Task';
-import Billable from './Billable';
-import ProjectSelect from './ProjectSelect';
+import { createTimestamp } from '../utils/timeUtils';
+
 import TimerMode from './TimerMode';
 import ManualMode from './ManualMode';
-import CategorySelect from './CategorySelect';
 
 export default class Timer extends Component {
-  renderTimerMode() {
-    const {
-      isTiming, handleTimerClick, handleManualSubmit, inTimerMode,
-    } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      isTiming: false,
+      inTimerMode: true,
+    };
 
-    return (
-      <div className="flex w-100 items-center justify-end ph2">
-        {inTimerMode ? (
-          <TimerMode isTiming={isTiming} handleTimerClick={handleTimerClick} />
-        ) : (
-          <ManualMode handleManualSubmit={handleManualSubmit} />
-        )}
-      </div>
-    );
+    this.handleManualSubmit = this.handleManualSubmit.bind(this);
+    this.handleTimerClick = this.handleTimerClick.bind(this);
+    this.toggleTimerMode = this.toggleTimerMode.bind(this);
   }
 
-  renderTimerModeIcon() {
-    const { inTimerMode } = this.props;
-    const { handleTimerMode } = this.props;
-    return (
-      <div className="items-center pointer dim">
-        <FontAwesomeIcon
-          icon={inTimerMode ? faEdit : faUserClock}
-          size="1x"
-          onClick={handleTimerMode}
-        />
-      </div>
-    );
+  handleTimerClick() {
+    const { isTiming } = this.state;
+    const { setStartTime, setEndTime } = this.props;
+
+    if (!isTiming) {
+      this.setState({ isTiming: true });
+      const startTime = createTimestamp();
+      setStartTime(startTime);
+    } else {
+      this.setState({ isTiming: false });
+      const endTime = createTimestamp();
+      setEndTime(endTime);
+    }
+  }
+
+  handleManualSubmit(startTime, endTime) {
+    const { setStartTime, setEndTime } = this.props;
+
+    setStartTime(startTime);
+    setEndTime(endTime);
+  }
+
+  toggleTimerMode() {
+    const { isTiming } = this.state;
+    if (!isTiming) {
+      this.setState(prevState => ({ inTimerMode: !prevState.inTimerMode }));
+    }
   }
 
   render() {
-    const {
-      billable,
-      billableClick,
-      categories,
-      categoriesOpen,
-      handleCategorySelect,
-      handleProjectSelect,
-      project,
-      toggleCategoriesList,
-    } = this.props;
+    const { isTiming, inTimerMode } = this.state;
+    const { startTime } = this.props;
 
     return (
-      <div className="mw100 center bg-white br3 h3 pa3 mv3 ba b--black-10 flex justify-between items-center">
-        <Task />
+      <Fragment>
+        <div className="flex w-100 items-center justify-end ph2">
+          {inTimerMode ? (
+            <TimerMode
+              isTiming={isTiming}
+              startTime={startTime}
+              handleTimerClick={this.handleTimerClick}
+            />
+          ) : (
+            <ManualMode handleManualSubmit={this.handleManualSubmit} />
+          )}
+        </div>
 
-        <ProjectSelect handleProjectSelect={handleProjectSelect} project={project} />
-
-        <CategorySelect
-          categories={categories}
-          categoriesOpen={categoriesOpen}
-          toggleCategoriesList={toggleCategoriesList}
-          handleCategorySelect={handleCategorySelect}
-        />
-
-        <Billable billableClick={billableClick} billable={billable} />
-
-        {this.renderTimerMode()}
-
-        {this.renderTimerModeIcon()}
-      </div>
+        <div className="items-center pointer dim">
+          <FontAwesomeIcon
+            icon={inTimerMode ? faEdit : faUserClock}
+            size="1x"
+            onClick={this.toggleTimerMode}
+          />
+        </div>
+      </Fragment>
     );
   }
 }
 
 Timer.propTypes = {
-  billable: PropTypes.bool.isRequired,
-  billableClick: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.object),
-  categoriesOpen: PropTypes.bool.isRequired,
-  handleCategorySelect: PropTypes.func.isRequired,
-  handleManualSubmit: PropTypes.func.isRequired,
-  handleProjectSelect: PropTypes.func.isRequired,
-  handleTimerClick: PropTypes.func.isRequired,
-  handleTimerMode: PropTypes.func.isRequired,
-  inTimerMode: PropTypes.bool.isRequired,
-  isTiming: PropTypes.bool.isRequired,
-  project: PropTypes.string.isRequired,
-  toggleCategoriesList: PropTypes.func.isRequired,
-};
-
-Timer.defaultProps = {
-  categories: [],
+  setStartTime: PropTypes.func.isRequired,
+  setEndTime: PropTypes.func.isRequired,
+  startTime: PropTypes.string.isRequired,
 };

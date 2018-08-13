@@ -4,8 +4,8 @@ import ProjectSelect from '../../../src/components/ProjectSelect';
 
 describe('ProjectSelect Component', () => {
   it('renders without crashing', () => {
-    const handleProjectSelect = jest.fn();
-    const project = '';
-    shallow(<ProjectSelect handleProjectSelect={handleProjectSelect} project={project} />);
+    const setSelectedProject = jest.fn();
+    const selectedProject = '';
+    shallow(<ProjectSelect setSelectedProject={setSelectedProject} selectedProject={selectedProject} />);
   });
 });

@@ -7,7 +7,7 @@ export default class TimerHistory extends Component {
     const { timeEntries } = this.props;
 
     return timeEntries.map(({
-      _id, billable, categories, description, project, timeEnd, timeStart,
+      _id, billable, categories, description, project, endTime, startTime,
     }) => (
       <TimerHistoryItem
         billable={billable}
@@ -15,8 +15,8 @@ export default class TimerHistory extends Component {
         description={description}
         key={_id}
         project={project}
-        timeEnd={timeEnd}
-        timeStart={timeStart}
+        endTime={endTime}
+        startTime={startTime}
       />
     ));
   }

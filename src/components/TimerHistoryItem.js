@@ -5,10 +5,10 @@ import { displayDate, displayStartAndEndTimes, displayTimeElapsed } from '../uti
 export default class TimerHistoryItem extends Component {
   render() {
     const {
-      billable, categories, description, project, timeEnd, timeStart,
+      billable, categories, description, project, endTime, startTime,
     } = this.props;
 
-    const isTimeOut = timeEnd !== 0;
+    const isTimeOut = endTime !== 0;
 
     const renderCategories = categories.filter(item => item.selected).map((item, index, arr) => {
       const lastIndex = arr.length - 1;
@@ -24,9 +24,9 @@ export default class TimerHistoryItem extends Component {
         <div>{renderCategories}</div>
         <div>{billable && '$'}</div>
 
-        <div>{displayDate(timeStart)}</div>
-        <div>{displayStartAndEndTimes(timeStart, timeEnd)}</div>
-        <div>{displayTimeElapsed(timeStart, timeEnd)}</div>
+        <div>{displayDate(startTime)}</div>
+        <div>{displayStartAndEndTimes(startTime, endTime)}</div>
+        <div>{displayTimeElapsed(startTime, endTime)}</div>
       </div>
     );
   }
@@ -37,8 +37,8 @@ TimerHistoryItem.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object),
   description: PropTypes.string.isRequired,
   project: PropTypes.shape({}),
-  timeEnd: PropTypes.string.isRequired,
-  timeStart: PropTypes.string.isRequired,
+  endTime: PropTypes.string.isRequired,
+  startTime: PropTypes.string.isRequired,
 };
 
 TimerHistoryItem.defaultProps = {
