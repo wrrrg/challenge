@@ -24,9 +24,9 @@ The challenge is designed to take a maximum of 8 hours. If you can track your ho
 
 ### Resources:
 
-[Github Basics](https://guides.github.com/activities/hello-world)
-[TDD (Test Driven Development)](https://www.agilealliance.org/glossary/tdd)
-[This Repo's Wiki](https://github.com/moove-it/challenge/wiki)
+- [Github Basics](https://guides.github.com/activities/hello-world)
+- [TDD (Test Driven Development)](https://www.agilealliance.org/glossary/tdd)
+- [This Repo's Wiki](https://github.com/moove-it/challenge/wiki)
 
 ## Installing dependencies
 
