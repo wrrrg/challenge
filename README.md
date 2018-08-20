@@ -11,14 +11,18 @@ This application is a loose clone of the application [Toggl](https://toggl.com).
   - Tests have been written that verify the above.
   - All tests are passing.
   - This README has been updated to reflect any relevant changes (features only).
+  
+### Time
+
+We only expect candidates to spend about 8 hours on the challenge. Note that this does not mean that we expect you to _finish_ all issues in 8 hours. You should read through the issues and strategically select a few challenges that you think you can really nail in that time. Anything past that is bonus. It is better to be thorough with one or two issues than to half-complete all of them.
 
 ### Hints for success
 
-• Organize your solutions logically, either by commits or even by branches. This makes it easier to see your process.
-• Commit often, and use descriptive commit messages. Each commit should be easily summarized in a short phrase. If you find yourself writing "and" a lot, it's probable that you have more than one commit on your hands.
-• Do not try to solve all of the issues at once. Tackle each ticket on its own.
-• If you are familiar with TDD, try to write the tests first.
-• If you get stuck on an issue, or cannot easily satisfy all of the "done" criteria, move on to the next issue. The goal is to have some fresh work to discuss at your technical interview. Better half done than not done at all. Bonus, sometimes solving one problem will help you understand another.
+- Organize your solutions logically, either by commits or even by branches. This makes it easier to see your process.
+- Commit often, and use descriptive commit messages. Each commit should be easily summarized in a short phrase. If you find yourself writing "and" a lot, it's probable that you have more than one commit on your hands.
+- Do not try to solve all of the issues at once. Tackle each ticket on its own.
+- If you are familiar with TDD, try to write the tests first.
+- If you get stuck on an issue, or cannot easily satisfy all of the "done" criteria, move on to the next issue. The goal is to have some fresh work to discuss at your technical interview. Better half done than not done at all. Bonus, sometimes solving one problem will help you understand another.
 
 The challenge is designed to take a maximum of 8 hours. If you can track your hours, try to match that time.
 
