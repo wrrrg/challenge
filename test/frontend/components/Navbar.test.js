@@ -12,3 +12,11 @@ describe('Navbar', () => {
     mount(<Navbar />);
   });
 });
+
+
+// Here we want to add another test to make sure our Navbar link is
+// correctly redirecting to the moove-it.com page in a new window. However,
+// adding the test seems much more complicated than simply adding the html
+// element. Possibly redundant. Want to move on to other tickets for now,
+// but want to return if time permits.
+
