@@ -39,6 +39,28 @@ describe('TimerHistoryItem Component', () => {
     expect(datetext).toEqual('07/04/2018');
   });
 
+  // added test here to ensure the item component renders
+  // description correctly
+  it('renders the correct description', () => {
+    const wrapper = shallow(<TimerHistoryItem
+      billable={billable}
+      categories={categories}
+      categories={[]}
+      project={project}
+      description={description}
+      endTime={endTime}
+      startTime={startTime}
+    />);
+
+    const descriptiontext = wrapper
+      .children()
+      .at(0)
+      .text();
+
+    expect(descriptiontext).toEqual('Some task');
+  });
+
+
   it('renders the correct start time and end time', () => {
     const wrapper = shallow(<TimerHistoryItem
       billable={billable}
