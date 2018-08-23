@@ -46,13 +46,15 @@ class CategorySelect extends Component {
           onClick={this.toggleCategoriesList}
         />
         {categoriesOpen ? (
-          <ul className="list absolute bg-white black-90 ba b--light-silver br3 pb3 pt3 ph0 ma4 z-999 w-auto minwidth-300 positionCategories">
+          // added 'categoriesList' class to ul element for css selection to fix cursor bug
+          <ul className="list absolute bg-white black-90 ba b--light-silver br3 pb3 pt3 ph0 ma4 z-999 w-auto minwidth-300 positionCategories categoriesList">
             {allCategories.map(item => (
               <li
                 className="listItem ph0 pv2"
                 key={item.title}
                 onClick={() => this.handleCategorySelect(item.id)}
                 role="presentation"
+
               >
                 <div className="ml3 dib w-10">
                   {selectedCategories.includes(item.id) && <FontAwesomeIcon icon={faCheck} />}
