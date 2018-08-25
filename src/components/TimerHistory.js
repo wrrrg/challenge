@@ -5,7 +5,8 @@ import TimerHistoryItem from './TimerHistoryItem';
 export default class TimerHistory extends Component {
   renderHistoryItem() {
     const { timeEntries } = this.props;
-
+    // before we begin rendering we want to sort timeEntries
+    // we will import a helper util to accomplish this
     return Object.entries(timeEntries).map(([id, entry]) => {
       const {
         description, project, categories, billable, startTime, endTime,

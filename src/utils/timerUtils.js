@@ -1,4 +1,5 @@
 import uuid from 'uuid/v1';
+import moment from 'moment';
 
 const KEY_PREFIX = 'minutero:';
 
@@ -39,4 +40,27 @@ export function fetchTimeEntries() {
   }
 
   return allTimeEntries;
+}
+
+
+export function objectToArray(obj) {
+  return Object.keys(obj).map((key) => {
+    return { [key]: obj[key] };
+  });
+}
+
+export function unixSort(a, b) {
+  // this nesting is because we will convert our big object to an array,
+  // and we won't know the first key (the dynamic uuid) from which we need the
+  // next nested object. This allows us to access the second nested object.
+  const aUnix = a[Object.keys(a)[0]].unix;
+  const bUnix = b[Object.keys(b)[0]].unix;
+  let compare = 0;
+  if (aUnix > bUnix) {
+    compare = 1;
+  } else if (aUnix < bUnix) {
+    compare = -1;
+  }
+  // flip to have greatest unix timestamp sort first, so descending from most recent
+  return compare * -1;
 }
