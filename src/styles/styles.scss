@@ -99,6 +99,12 @@ html {
   cursor: default;
 }
 
+.trashButton {
+    border: none;
+  background: none !important;
+  padding: 0;
+}
+
 .minwidth-300 {
   min-width: 300px;
 }

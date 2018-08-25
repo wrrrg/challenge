@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { displayDate, displayStartAndEndTimes, displayTimeElapsed } from '../utils/timeUtils';
 
 export default class TimerHistoryItem extends Component {
@@ -15,6 +17,10 @@ export default class TimerHistoryItem extends Component {
       return `${item.title}${index === lastIndex ? '' : ', '}`;
     });
 
+    const buttonStyle = {
+      cursor: 'pointer',
+    };
+
     if (!isTimeOut) return '';
     // added timerHistoryItem class for testing
     return (
@@ -27,7 +33,8 @@ export default class TimerHistoryItem extends Component {
         <div>{displayDate(startTime)}</div>
         <div>{displayStartAndEndTimes(startTime, endTime)}</div>
         <div>{displayTimeElapsed(startTime, endTime)}</div>
-      </div>
+        <div><span className="trashDelete" style={buttonStyle}><FontAwesomeIcon border={false} pulse={false} icon={faTrash} /></span></div>
+      </div >
     );
   }
 }
