@@ -57,3 +57,13 @@ In your browser, navigate to `localhost:8080`. You should see the landing page: 
 ## Run the tests
 
 Run `npm test` after installation to confirm that all of the tests pass.
+
+
+## New Feature: Advertising
+
+The logo on the navbar component has been updated to be a clickable link that will take users to the www.moove-it.com homepage in a new window.
+
+## New Feature: Timer History Items in Descending Order 
+
+Added a few utilities to sort our time entries descending from the most recent down to the oldest. Accomplished this by converting our startTime properties to 
+unix timestamps with moment.js, sorting data, and then returning data to the TimerHistory component. Added tests to ensure sorting works as well.

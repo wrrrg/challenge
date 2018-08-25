@@ -62,3 +62,30 @@ export function createManualTimestampWithDate(timeStr, date) {
       .slice(10)
   );
 }
+
+// add unix timestamps to sort entries by descending time
+// for this to work the function accepts an array -
+// we will have to already convert our data to an array before calling this function
+export function addUnix(timesArr) {
+  return timesArr.forEach((time) => {
+    //   const time = timesArr[i];
+    const startTime = time[Object.keys(time)[0]].startTime;
+    //   console.log(startTime);
+
+    const unixTime = moment(startTime).format('X');
+    //   console.log(unixTime);
+
+    time[Object.keys(time)[0]].unix = parseInt(unixTime);
+    //   time[Object.keys[time][0]].unix = unixTime;
+  });
+  // const unixArr = [];
+  // for (i = 0; i < timesArr.length; i++) {
+  //   const time = timesArr[i];
+  //   const start = time[Objects.keys(time)[0].startTime];
+  //   const unixTime = moment(start).format('X');
+  //   console.log(unixTime);
+  //   unixArr.push(unixArr);
+  // }
+
+  // return unixArr;
+}
