@@ -16,9 +16,9 @@ export default class TimerHistoryItem extends Component {
     });
 
     if (!isTimeOut) return '';
-
+    // added timerHistoryItem class for testing
     return (
-      <div className="black-50 f6 flex justify-between w100 center bg-white br0 pa3 pa3-ns mv3 ba b--black-10">
+      <div className="black-50 f6 flex justify-between w100 center bg-white br0 pa3 pa3-ns mv3 ba b--black-10 timerHistoryItem">
         <div>{description || 'DESCRIPTION PLACEHOLDER'}</div>
         <div>{project && project.name}</div>
         <div>{renderCategories}</div>
