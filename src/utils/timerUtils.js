@@ -44,9 +44,7 @@ export function fetchTimeEntries() {
 
 
 export function objectToArray(obj) {
-  return Object.keys(obj).map((key) => {
-    return { [key]: obj[key] };
-  });
+  return Object.keys(obj).map(key => ({ [key]: obj[key] }));
 }
 
 export function unixSort(a, b) {
@@ -54,7 +52,9 @@ export function unixSort(a, b) {
   // and we won't know the first key (the dynamic uuid) from which we need the
   // next nested object. This allows us to access the second nested object.
   const aUnix = a[Object.keys(a)[0]].unix;
+
   const bUnix = b[Object.keys(b)[0]].unix;
+
   let compare = 0;
   if (aUnix > bUnix) {
     compare = 1;

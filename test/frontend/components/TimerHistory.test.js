@@ -31,8 +31,14 @@ describe('TimerHistory Component', () => {
     expect(u).toEqual(1530727200);
   });
 
-  it('should render sorted TimerHistoryItems most recent to oldest', () => {
-    const wrapper = mount(<TimerHistory timeEntries={timeEntrySeeds()} />);
+  it('helper functions should render sorted TimerHistoryItems most recent to oldest', () => {
+    let timeEntries = timeEntrySeeds();
+    const timesArr = objectToArray(timeEntries);
+    addUnix(timesArr);
+    timesArr.sort(unixSort);
+    timeEntries = Object.assign({}, ...timesArr);
+
+    const wrapper = mount(<TimerHistory timeEntries={timeEntries} />);
 
     const timeHistoryItems = wrapper.find('TimerHistoryItem');
 
