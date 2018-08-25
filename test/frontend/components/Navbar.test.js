@@ -11,6 +11,14 @@ describe('Navbar', () => {
 
     mount(<Navbar />);
   });
+
+  it('contains the anchor element with appropriate attributes', () => {
+    const wrapper = mount(<Navbar />);
+
+    const link = wrapper.find('a');
+
+    console.log(wrapper.html());
+  });
 });
 
 

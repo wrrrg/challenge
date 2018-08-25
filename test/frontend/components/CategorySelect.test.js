@@ -31,7 +31,6 @@ describe('CategorySelect Component', () => {
     // ensure that our dummy categories are set in the wrapper state
     wrapper.setState({ categoriesOpen: true, allCategories });
     wrapper.update();
-    console.log(wrapper.html());
 
     // ensure that we're finding an element with this class
     const ul = wrapper.find('.categoriesList');
