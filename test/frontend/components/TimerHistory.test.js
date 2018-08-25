@@ -24,7 +24,7 @@ describe('TimerHistory Component', () => {
     const timesArr = objectToArray(timeEntries);
     // add the unix epoch timestamp
     addUnix(timesArr);
-    console.log(timesArr);
+
 
     // // check that the first value is what we think it should be -
     const u = timesArr[0][Object.keys(timesArr[0])[0]].unix;
